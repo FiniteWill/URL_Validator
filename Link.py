@@ -1,17 +1,16 @@
 from enum import Enum
 
 class Status(Enum):
-    GOOD = 0
-    BAD = -100
-    MODIFIED = 100
-    UNKNOWN = 200
+    GOOD = "Good"
+    BAD = "Bad"
+    MODIFIED = "Mod"
+    UNKNOWN = "?"
     
 class Link:
-    __link = ""
-    __status = Status.UNKNOWN
-    def __init__(txt : str = "") -> str:
-        __link = txt
-        __status = Status.UNKOWN
     
-
-
+    link = ""
+    status = Status(Status.UNKNOWN)
+    
+    def __init__(self, txt : str) -> str:
+        self.link = txt
+        self.status = Status(Status.UNKNOWN)

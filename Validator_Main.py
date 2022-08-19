@@ -2,21 +2,29 @@ import sqlite3 as sql
 import requests as req
 
 # User defined class imports
-import Link
+import link as lin
 
 '''
 Main thread that handles setup and start of main program
 '''
 if __name__ == '__main__':
-    __isRunning = True
-    __curInput = ""
-    while __isRunning:
-        __curInput = input("Input a link to check\n")
+    __is_running = True
+    __cur_input = ""
+    
+    while __is_running:
+        __cur_input = input("Input a link to check\n")
+        r = lin.Link(str(__cur_input))
 
-        print("Testing "+str(__curInput))
-        __curReq = req.get(str(__curInput))
-        print(str(__curReq))
-        __curInput = input("Enter Q to quit, any other key will continue\n")
+        # Make request for given link    
+        try:
+            print("Testing "+r.link)
+            r.status = req.get(r.link)
+            print(r.status)
+        except:
+            print("Invalid link")
 
-        if(__curInput == "Q" or __curInput == "q"):
-            __isRunning = False
+        # Determine if user wants to continue or quit
+        __cur_input = input("Enter Q to quit, any other key will continue\n")
+
+        if(__cur_input == "Q" or __cur_input == "q"):
+            __is_running = False
